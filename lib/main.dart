@@ -5,32 +5,41 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  void respuestaPregunta() {
+    print("Respuesta seleccionada");
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    var questions = [
+      "¿Cual es tu colo favorito?",
+      "¿Cual es tu animal favorito?"
+    ];
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Mi primera aplicación"),
+        ),
+        body: Column(
+          children: [
+            Text("Pregunta"),
+            RaisedButton(
+              onPressed: respuestaPregunta,
+              child: Text("Respuesta 1"),
+            ),
+            RaisedButton(
+              onPressed: () => print("Respuesta 2 seleccionada"),
+              child: Text("Respuesta 2"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                //...
+                print("Respuesta 3 seleccionada");
+              },
+              child: Text("Respuesta 3"),
+            )
+          ],
+        ),
       ),
     );
   }
