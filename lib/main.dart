@@ -4,17 +4,26 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
   var preguntaIndice = 0;
 
   void respuestaPregunta() {
-    preguntaIndice += 1;
+    setState(() {
+      preguntaIndice += 1;
+    });
     print(preguntaIndice);
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
+    var preguntas = [
       "¿Cuál es tu color favorito?",
       "¿Cuál es tu animal favorito?"
     ];
@@ -26,7 +35,7 @@ class MyApp extends StatelessWidget {
         body: Column(
           children: [
             Text(
-              questions[preguntaIndice],
+              preguntas[preguntaIndice],
             ),
             RaisedButton(
               onPressed: respuestaPregunta,
