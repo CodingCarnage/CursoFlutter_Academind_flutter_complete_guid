@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import './pregunta.dart';
+import './respuesta.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -7,25 +10,35 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  var preguntaIndice = 0;
+class _MyAppState extends State<MyApp> {
+  var _preguntaIndice = 0;
 
-  void respuestaPregunta() {
+  void _respuestaPregunta() {
     setState(() {
-      preguntaIndice += 1;
+      _preguntaIndice += 1;
     });
-    print(preguntaIndice);
+    print(_preguntaIndice);
   }
 
   @override
   Widget build(BuildContext context) {
     var preguntas = [
-      "¿Cuál es tu color favorito?",
-      "¿Cuál es tu animal favorito?"
+      {
+        "preguntaTexto": "¿Cuál es tu color favorito?",
+        "respuestas": ["Negro", "Rojo", "Verde", "Blanco"]
+      },
+      {
+        "preguntaTexto": "¿Cuál es tu animal favorito?",
+        "respuestas": ["Conejo", "Tortuga", "Perro", "Gato"]
+      },
+      {
+        "preguntaTexto": "¿Cuál es tu comida favorita?",
+        "respuestas": ["Pizza", "Hamburguesas", "Hotdog", "Tacos"]
+      },
     ];
     return MaterialApp(
       home: Scaffold(
@@ -34,24 +47,13 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(
-              preguntas[preguntaIndice],
+            Pregunta(
+              preguntas[_preguntaIndice]["preguntaTexto"],
             ),
-            RaisedButton(
-              onPressed: respuestaPregunta,
-              child: Text("Respuesta 1"),
-            ),
-            RaisedButton(
-              onPressed: () => print("Respuesta 2 seleccionada"),
-              child: Text("Respuesta 2"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                // Algun Codigo...
-                print("Respuesta 3 seleccionada");
-              },
-              child: Text("Respuesta 3"),
-            )
+            ...(preguntas[_preguntaIndice]["respuestas"] as List<String>)
+                .map((respuesta) {
+              return Respuesta(_respuestaPregunta, respuesta);
+            }).toList(),
           ],
         ),
       ),
