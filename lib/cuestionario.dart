@@ -20,9 +20,11 @@ class Cuestionario extends StatelessWidget {
         Pregunta(
           preguntas[preguntaIndice]["preguntaTexto"],
         ),
-        ...(preguntas[preguntaIndice]["respuestas"] as List<String>)
+        ...(preguntas[preguntaIndice]["respuestas"]
+                as List<Map<String, Object>>)
             .map((respuesta) {
-          return Respuesta(respuestaPregunta, respuesta);
+          return Respuesta(
+              () => respuestaPregunta(respuesta["puntos"]), respuesta["texto"]);
         }).toList(),
       ],
     );

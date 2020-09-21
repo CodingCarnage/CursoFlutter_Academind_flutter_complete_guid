@@ -18,20 +18,46 @@ class _MyAppState extends State<MyApp> {
   final _preguntas = const [
     {
       "preguntaTexto": "¿Cuál es tu color favorito?",
-      "respuestas": ["Negro", "Rojo", "Verde", "Blanco"]
+      "respuestas": [
+        {"texto": "Negro", "puntos": 10},
+        {"texto": "Rojo", "puntos": 5},
+        {"texto": "Verde", "puntos": 3},
+        {"texto": "Blanco", "puntos": 1}
+      ]
     },
     {
       "preguntaTexto": "¿Cuál es tu animal favorito?",
-      "respuestas": ["Conejo", "Tortuga", "Perro", "Gato"]
+      "respuestas": [
+        {"texto": "Conejo", "puntos": 3},
+        {"texto": "Tortuga", "puntos": 11},
+        {"texto": "Perro", "puntos": 5},
+        {"texto": "Gato", "puntos": 9}
+      ]
     },
     {
       "preguntaTexto": "¿Cuál es tu comida favorita?",
-      "respuestas": ["Pizza", "Hamburguesas", "Hotdog", "Tacos"]
+      "respuestas": [
+        {"texto": "Pizza", "puntos": 1},
+        {"texto": "Hamburguesas", "puntos": 1},
+        {"texto": "Hotdog", "puntos": 1},
+        {"texto": "Tacos", "puntos": 1}
+      ]
     },
   ];
-  var _preguntaIndice = 0;
 
-  void _respuestaPregunta() {
+  int _preguntaIndice = 0;
+  int _totalPuntos = 0;
+
+  void _resetearQuestionario() {
+    setState(() {
+      _preguntaIndice = 0;
+      _totalPuntos = 0;
+    });
+  }
+
+  void _respuestaPregunta(int puntos) {
+    _totalPuntos += puntos;
+
     setState(() {
       _preguntaIndice += 1;
     });
@@ -55,7 +81,7 @@ class _MyAppState extends State<MyApp> {
                 preguntaIndice: _preguntaIndice,
                 preguntas: _preguntas,
                 respuestaPregunta: _respuestaPregunta)
-            : Resultado(),
+            : Resultado(_totalPuntos, _resetearQuestionario),
       ),
     );
   }
