@@ -1,4 +1,4 @@
-# Flutter Tutorial Acedemind
+# Flutter Tutorial Academind
 
 En este repositorio encontraras todo el codigo desarrollado durante el curso de Academind en YouTube, en el cual se realiza una app en Flutter.
 Algo de este codigo se tradujo de idioma ingles a español.
